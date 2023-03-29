@@ -31,38 +31,30 @@ class _MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<_MyHomePage> {
+  final items = [
+    "assets/images/1801287.svg",
+    "https://raw.githubusercontent.com/dnfield/flutter_svg/7d374d7107561cbd906d7c0ca26fef02cc01e7c8/example/assets/flutter_logo.svg"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(children: <Widget>[
-        CarouselSlider(
-          options: CarouselOptions(height: 400.0),
-          items: [1,2,3,4,5].map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                   margin: EdgeInsets.all(150.0),
-                    decoration: const BoxDecoration(
-                        // color: Colors.white
-                    ),
-                    child: SvgPicture.network(
-                      'https://raw.githubusercontent.com/dnfield/flutter_svg/7d374d7107561cbd906d7c0ca26fef02cc01e7c8/example/assets/flutter_logo.svg',
-                      semanticsLabel: 'flutter logo',
-                      placeholderBuilder: (BuildContext context) => Container(
-                          // padding: const EdgeInsets.all(700.0),
-                          child: const CircularProgressIndicator()),
-                    )
-                );
-              },
-            );
-          }).toList(),
-        )
-      ]),
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: CarouselSlider.builder(
+          itemCount: items.length,
+          options: CarouselOptions(
+            height: 300.0,
+          ),
+          itemBuilder:
+              (BuildContext context, int itemIndex, int pageViewIndex) =>
+                  Container(
+            padding: const EdgeInsets.all(100.0),
+            child: SvgPicture.network(
+              items[itemIndex],
+            ),
+          ),
+        ));
   }
 }
-
-
