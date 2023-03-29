@@ -51,10 +51,18 @@ class _MyHomePageState extends State<_MyHomePage> {
               (BuildContext context, int itemIndex, int pageViewIndex) =>
                   Container(
             padding: const EdgeInsets.all(100.0),
-            child: SvgPicture.network(
-              items[itemIndex],
-            ),
+            child: returnImage(items[itemIndex]),
           ),
         ));
+  }
+
+  SvgPicture returnImage(String name) {
+    if (name.contains('http')) {
+      return SvgPicture.network(
+        name,
+      );
+    } else {
+      return SvgPicture.asset(name);
+    }
   }
 }
